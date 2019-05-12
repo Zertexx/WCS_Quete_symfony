@@ -17,7 +17,7 @@ class BlogController extends AbstractController
 
 
 
-    public function show( $slug)
+    public function show( $slug = 'Article Sans Titre')
     {
         $slug = ucwords(str_replace("-", " ", $slug));
         return $this->render('Blog/show.html.twig', [
