@@ -1,6 +1,6 @@
 #index:
 #    path: /default/index
 #    controller: App\Controller\DefaultController::index
-app_index:
-  path: /
-  controller: App\Controller\DefaultController::index
+#app_index:
+#  path: /
+#  controller: App\Controller\DefaultController::index
