@@ -6,7 +6,14 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    {% include 'templates/header.html.twig' %}
+
+    {% block body %}{% endblock %}
+
+
+    {% include 'templates/footer.html.twig' %}
+
+    {% block javascripts %}{% endblock %}
+
     </body>
 </html>
