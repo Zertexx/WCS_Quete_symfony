@@ -65,7 +65,6 @@ class BlogController extends AbstractController
         );
 
 
-
         return $this->render(
             'blog/show.html.twig',
             [
@@ -75,13 +74,12 @@ class BlogController extends AbstractController
     }
 
     /**
-     *  @Route("/category/{category}", name="show_category")
+     *  @Route("/category/{name}", name="show_category")
      */
 
-    public function  showByCategory($category='javascript'): Response
+    public function  showByCategory(Category $category): Response
     {
-
-        $category = $this->getDoctrine()->getRepository(Category::class)->findOneByName($category);
+        //$category = $this->getDoctrine()->getRepository(Category::class)->findOneByName($category);
 
         $articles = $category->getArticles();
 

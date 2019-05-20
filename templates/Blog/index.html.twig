@@ -2,12 +2,19 @@
 
 {% block title %}All articles{% endblock %}
 
+
+
 {% block body %}
+    <h1>Liste de tous les articles</h1>
+{% for article in articles %}
+    <h2>{{ article.title }}</h2> <br>
+
+{% endfor %}
     <a href="{{ path('blog_show', { 'slug': "javascript-vs-php" }) }}">
         Testing show() method from BlogController with a real articles slug.
     </a>
     <br>
-    <a href="{{ path('blog_show_category') }}">
+    <a href="{{ path('blog_index') }}">
         Testing index() method from BlogController to view all articles.
     </a>
 {% endblock %}

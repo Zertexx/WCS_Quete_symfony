@@ -1,10 +1,14 @@
 {% extends 'templates/base.html.twig' %}
 
+
+
 {% block body %}
+
     <a href="{{ path('blog_show', { 'slug': "javascript-vs-php" }) }}">
         Testing show() method from BlogController with a real articles slug.
     </a>
     <br>
-<a href="{{ path('blog_index') }}">
+    <a href="{{ path('blog_show_category') }}">
         Testing index() method from BlogController to view all articles.
-    </a>{% endblock %}
+    </a>
+{% endblock %}
