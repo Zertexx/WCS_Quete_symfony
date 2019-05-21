@@ -5,11 +5,22 @@
 
 
 {% block body %}
+    {{ form_start(form) }}
+    {{ form_row(form.searchField) }}
+    <button type="submit" name="btnSearch">Rechercher</button>
+    {{ form_end(form) }}
+
     <h1>Liste de tous les articles</h1>
 {% for article in articles %}
     <h2>{{ article.title }}</h2> <br>
 
 {% endfor %}
+
+    <a href="{{ path('category') }}">
+        Ajouter une catégorie
+    </a>
+    <br>
+
     <a href="{{ path('blog_show', { 'slug': "javascript-vs-php" }) }}">
         Testing show() method from BlogController with a real articles slug.
     </a>
