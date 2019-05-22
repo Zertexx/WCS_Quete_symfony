@@ -21,7 +21,7 @@ class CategoryController extends AbstractController
     /**
      * Show all row from article's entity
      *@param $request Request
-     * @Route("/category", name="category")
+     * @Route("/category/add", name="category_add")
      * @return Response A response instance
      */
 
@@ -42,5 +42,20 @@ class CategoryController extends AbstractController
 
     }
 
+    /**
+     * Show all row from article's entity
+     * @Route("/category", name="category")
+     * @return Response A response instance
+     */
+
+    public function show():Response
+    {
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findAll();
+        return $this->render('Blog/list.html.twig', [
+            'categories' => $categories
+        ]);
+    }
 
 }

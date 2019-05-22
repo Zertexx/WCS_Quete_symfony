@@ -10,13 +10,8 @@
     <button type="submit" name="btnSearch">Rechercher</button>
     {{ form_end(form) }}
 
-    <h1>Liste de tous les articles</h1>
-{% for article in articles %}
-    <h2>{{ article.title }}</h2> <br>
 
-{% endfor %}
-
-    <a href="{{ path('category') }}">
+    <a href="{{ path('category_add') }}">
         Ajouter une catégorie
     </a>
     <br>
