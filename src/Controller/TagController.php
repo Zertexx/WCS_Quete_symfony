@@ -1,47 +1,42 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: zerto
- * Date: 27/05/2019
- * Time: 15:52
- */
-
 namespace App\Controller;
 
-
 use App\Entity\Tag;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-class TagController extends AbstractController
+Class TagController extends AbstractController
 {
     /**
-     * @Route("/tag", name="tags")
+     * @return Response
+     * @Route("/tag", name="tag_index")
      */
-
-    public function index(): Response
+    public function index():Response
     {
         $tags = $this->getDoctrine()
             ->getRepository(Tag::class)
             ->findAll();
-
-        return $this->render('Tag/index.html.twig', [
+        if (!$tags) {
+            throw $this->createNotFoundException(
+                'No article found in article\'s table.'
+            );
+        }
+        return $this->render(
+            'Tag/index.html.twig', [
             'tags' => $tags,
         ]);
     }
-
-
     /**
      * @param Tag $tag
      * @return Response
      * @Route("/tag/{name}", name="tag_article")
      */
-    public function showByTag(Tag $tag):Response
+    public function showArticlesByTag(Tag $tag):Response
     {
         $articles = $tag->getArticles();
         return $this->render(
-            'blog/tag_article.html.twig', [
+            'Tag/show.html.twig', [
             'articles' => $articles,
             'tags' => $tag
         ]);

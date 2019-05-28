@@ -1,11 +1,14 @@
+{% extends 'templates/base.html.twig' %}
+
 {% block body %}
     <h1> Liste de tous les tags</h1>
 
     {% for tag in tags %}
         <ul>
-            <li>{{ tag.name }}</li>
+            <li>   <a href="{{ path('tag_article', {'name': tag.name}) }}">{{ tag.name }}</a></li>
         </ul>
     {% endfor %}
 
-    <a href="{{ path('article_new') }}">Create new</a>
+
+    <a href="{{ path('article_index') }}">Liste des Articles</a>
 {% endblock %}
