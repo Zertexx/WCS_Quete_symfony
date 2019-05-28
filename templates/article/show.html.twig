@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-
-<title>Article</title>
-
+{% extends 'templates/base.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
 {% block body %}
     <h1>Article</h1>
 
@@ -27,4 +27,13 @@
     <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
 
     {{ include('article/_delete_form.html.twig') }}
+
+    <strong>Tags :</strong>
+    <ul>
+        {% for tag in article.tags %}
+            <li>{{ tag.name }} </li>
+        {% else %}
+            <li>No tags for this article</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

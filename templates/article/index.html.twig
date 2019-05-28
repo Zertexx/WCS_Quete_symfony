@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+{% extends 'templates/base.html.twig' %}
 
-<title>Article index</title>
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
 
 {% block body %}
     <h1>Article index</h1>
@@ -34,4 +36,8 @@
     </table>
 
     <a href="{{ path('article_new') }}">Create new</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}

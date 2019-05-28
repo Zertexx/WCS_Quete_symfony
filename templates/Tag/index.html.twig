@@ -1,0 +1,11 @@
+{% block body %}
+    <h1> Liste de tous les tags</h1>
+
+    {% for tag in tags %}
+        <ul>
+            <li>{{ tag.name }}</li>
+        </ul>
+    {% endfor %}
+
+    <a href="{{ path('article_new') }}">Create new</a>
+{% endblock %}
