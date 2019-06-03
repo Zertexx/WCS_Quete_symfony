@@ -28,7 +28,7 @@ class BlogController extends AbstractController
     public function index(): Response
     {
         $form = $this->createForm(ArticleSearchType::class, null,
-            ['method' => Request::METHOD_GET] );
+            ['method' => Request::METHOD_GET]);
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findAll();
@@ -55,10 +55,10 @@ class BlogController extends AbstractController
      * @Route("/show/{slug<^[a-z0-9-]+$>}",
      *     defaults={"slug" = null},
      *     name="show")
-     *  @return Response A response instance
+     * @return Response A response instance
      */
 
-    public function show(?string $slug) : Response
+    public function show(?string $slug): Response
     {
 
         if (!$slug) {
@@ -78,32 +78,7 @@ class BlogController extends AbstractController
                 'slug' => $slug,
             ]
         );
-    }
 
-    /**
-     *  @Route("/category/{name}", name="show_category")
-     */
-
-    public function  showByCategory(Category $category): Response
-    {
-        //$category = $this->getDoctrine()->getRepository(Category::class)->findOneByName($category);
-
-        $articles = $category->getArticles();
-
-        /*$articles = $this->getDoctrine()->getRepository(Article::class)
-            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
-*/
-        return $this->render(
-            'blog/category.html.twig',
-            [
-                'category' => $category,
-                'articles' => $articles,
-
-
-            ]
-        );
 
     }
-
-
 }

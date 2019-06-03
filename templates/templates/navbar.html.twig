@@ -1,23 +1,13 @@
 {% block body %}
     <ul class="nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link active" href="/blog">Retour à la page d'accueil</a>        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="/blog">Retour à la page d'accueil</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-        </li>
+            <a class="nav-link active" href="/">Accueil</a>
         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="{{ path('article_index') }}">Voir tous les articles</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+        <a class="nav-link" href="/category/add ">Ajouter une catégorie</a>
+        <a class="nav-link" href="/category/list ">Liste des catégories</a>
+
     </ul>
 {% endblock %}
 

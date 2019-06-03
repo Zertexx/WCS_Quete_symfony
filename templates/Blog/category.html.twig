@@ -4,10 +4,6 @@
 
 {% block body %}
 
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
 
     <h1>Résultat = {{ category.name }} </h1>
 
@@ -18,7 +14,4 @@
 
     {% endfor %}
 
-    <a href="/blog">
-        Retour à la page d'accueil
-    </a>
 {% endblock %}

@@ -18,14 +18,31 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends AbstractController
 {
+
     /**
      * Show all row from article's entity
-     *@param $request Request
+     * @Route("/category/list", name="category_index")
+     * @return Response A response instance
+     */
+
+    public function index(): Response
+    {
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findAll();
+        return $this->render('Blog/list.html.twig', [
+            'categories' => $categories
+        ]);
+    }
+
+    /**
+     * Show all row from article's entity
+     * @param $request Request
      * @Route("/category/add", name="category_add")
      * @return Response A response instance
      */
 
-    public function add(Request $request) : Response
+    public function add(Request $request): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -36,26 +53,30 @@ class CategoryController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
-            return $this->redirectToRoute('category');
+            return $this->redirectToRoute('category_index');
         }
         return $this->render('Blog/form.html.twig', ['form' => $form->createView()]);
 
     }
 
     /**
-     * Show all row from article's entity
-     * @Route("/category", name="category")
-     * @return Response A response instance
+     * @Route("/category/{slug<^[a-z0-9-]+$>}", name="category_show")
+     * @return Response
      */
 
-    public function show():Response
+    public function showByCategory(Category $category): Response
     {
-        $categories = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findAll();
-        return $this->render('Blog/list.html.twig', [
-            'categories' => $categories
-        ]);
-    }
 
+        $articles = $category->getArticles();
+
+        return $this->render(
+            'blog/category.html.twig',
+            [
+                'category' => $category,
+                'articles' => $articles,
+
+            ]
+        );
+
+    }
 }
