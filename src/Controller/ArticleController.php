@@ -18,6 +18,8 @@ class ArticleController extends AbstractController
 {
     /**
      * @Route("/", name="article_index", methods={"GET"})
+     * @param ArticleRepository $articleRepository
+     * @return Response
      */
     public function index(ArticleRepository $articleRepository): Response
     {
@@ -31,10 +33,11 @@ class ArticleController extends AbstractController
      * @Route("/new", name="article_new", methods={"GET","POST"})
      * @param Request $request
      * @param Slugify $slugify
+     * @param \Swift_Mailer $mailer
      * @return Response
      */
 
-    public function new(Request $request, Slugify $slugify): Response
+    public function new(Request $request, Slugify $slugify, \Swift_Mailer $mailer): Response
     {
 
         $article = new Article();
@@ -47,6 +50,15 @@ class ArticleController extends AbstractController
             $article = $article->setTitle($article->getSlug());
             $entityManager->persist($article);
             $entityManager->flush();
+
+            $message = (new \Swift_Message('Un nouvel article vient d\'être publié !'))
+                ->setFrom($this->getParameter('mailer_from'))
+                ->setTo($this->getParameter('mailer_from'))
+                ->setBody($this->renderView('article/email/notification.html.twig', ['article' => $article ]
+
+                ), 'text/html');
+
+                $mailer->send($message);
 
             return $this->redirectToRoute('article_index');
         }
