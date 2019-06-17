@@ -9,11 +9,14 @@
 
     </head>
     <body>
+
     <header>
     {% include 'templates/navbar.html.twig' %}
     </header>
-    {% block body %}{% endblock %}
 
+    <div class="container">
+    {% block body %}{% endblock %}
+    </div>
 
     {% include 'templates/footer.html.twig' %}
 
