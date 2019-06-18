@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Service\Slugify;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/article")
+ * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_AUTHOR')")
  */
 class ArticleController extends AbstractController
 {
@@ -95,16 +97,22 @@ class ArticleController extends AbstractController
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
+        if ($this->isGranted('ROLE_ADMIN') or ($article->getAuthor() === $this->getUser())) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $article->setSlug($slugify->generate($article->getTitle()));
-            $article = $article->setTitle($article->getSlug());
-            $this->getDoctrine()->getManager()->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $article->setSlug($slugify->generate($article->getTitle()));
+                $article = $article->setTitle($article->getSlug());
+                $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('article_index', [
-                'id' => $article->getId(),
-            ]);
+                return $this->redirectToRoute('article_index', [
+                    'id' => $article->getId(),
+                ]);
+            }
+        } else {
+            throw $this->createAccessDeniedException();
+
         }
+
 
         return $this->render('article/edit.html.twig', [
             'article' => $article,

@@ -7,7 +7,11 @@
     <h1>Liste de toutes les categories</h1>
 
     {% for category in categories %}
-        <h2>{{ category.name }}</h2> <br>
+
+        <ul>
+            <li>{{ category.name }}</li>
+
+        </ul>
 
     {% endfor %}
 

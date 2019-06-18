@@ -11,17 +11,24 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * @Route("/category")
+ * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_AUTHOR')")
+ */
 
 class CategoryController extends AbstractController
 {
 
     /**
      * Show all row from article's entity
-     * @Route("/category/list", name="category_index")
+     * @Route("/list", name="category_index")
      * @return Response A response instance
      */
 
@@ -38,7 +45,8 @@ class CategoryController extends AbstractController
     /**
      * Show all row from article's entity
      * @param $request Request
-     * @Route("/category/add", name="category_add")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/add", name="category_add")
      * @return Response A response instance
      */
 
@@ -60,7 +68,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/category/{slug<^[a-z0-9-]+$>}", name="category_show")
+     * @Route("/{slug<^[a-z0-9-]+$>}", name="category_show")
      * @return Response
      */
 
