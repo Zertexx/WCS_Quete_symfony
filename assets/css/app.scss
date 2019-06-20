@@ -1,5 +1,10 @@
-
 @import "~bootstrap";
+@import "login";
+@import "navbar";
+
+$primary-color: #6e8a9c;
 body {
-    background-color: #710010;
+    background-color: $primary-color;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+
 }
