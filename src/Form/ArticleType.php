@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Article;
 use App\Entity\Tag;
+use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,8 +24,7 @@ class ArticleType extends AbstractType
                             'choice_label' => 'name',
                             'expanded' => true,
                             'multiple' => true,
-                            'by_reference' => false,])
-        ;
+                            'by_reference' => false,]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

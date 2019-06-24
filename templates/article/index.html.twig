@@ -15,27 +15,43 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Content</th>
+                <th>Tags</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
+
         {% for article in articles %}
             <tr>
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
                 <td>{{ article.content }}</td>
+
+                <td>
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for tag in article.tags %}
+                    {% if tag is empty%}
+                        <td>Aucun tag associé</td>
+                    {% else %}
+                    <a class="dropdown-item" href="#">{{ tag.name }}</a>
+            {% endif %}
+        {% endfor %}
+
                 <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}">Voir</a>
 
                     {% if is_granted('ROLE_AUTHOR') %}
                         <a href="{{ path('article_edit', { 'id': article.id} ) }}">Éditer</a>
-                    {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
             </tr>
+        {% endif %}
+
         {% endfor %}
         </tbody>
     </table>

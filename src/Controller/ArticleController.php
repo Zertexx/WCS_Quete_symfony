@@ -23,10 +23,10 @@ class ArticleController extends AbstractController
      * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function index(ArticleRepository $articleRepository): Response
+    public function findArticlesWithTags(ArticleRepository $articleRepository): Response
     {
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articleRepository->findAllWithCategoriesAndTags(),
         ]);
     }
 
