@@ -13,9 +13,17 @@
     <header>
     {% include 'templates/navbar.html.twig' %}
     </header>
-
+    {% for category, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <div class="container">
-    {% block body %}{% endblock %}
+    {% block body %}
+
+    {% endblock %}
     </div>
 
     {% include 'templates/footer.html.twig' %}

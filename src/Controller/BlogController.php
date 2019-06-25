@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 /** @Route("/blog", name="blog_") */
 
@@ -22,29 +24,23 @@ class BlogController extends AbstractController
      * Show all row from article's entity
      *
      * @Route("/", name="index")
+     * @param SessionInterface $session
      * @return Response A response instance
      */
 
-    public function index(): Response
+    public function index(SessionInterface $session): Response
     {
-        $form = $this->createForm(ArticleSearchType::class, null,
-            ['method' => Request::METHOD_GET]);
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findAll();
 
-        if (!$articles) {
-            throw $this->createNotFoundException(
-                'No article found in article\'s table.'
-            );
+        if (!$session->has('total')) {
+            $session->set('total', 120); // if total doesn’t exist in session, it is initialized.
         }
 
-        return $this->render(
-            'Blog/index.html.twig',
-            ['articles' => $articles,
-                'form' => $form->createView(),
+        $total = $session->get('total'); // get actual value in session with ‘total' key.
+  // ...
 
-            ]);
+        return $this->render(
+            'Blog/index.html.twig'
+            );
     }
 
     /**
