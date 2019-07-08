@@ -26,7 +26,7 @@ public function __construct(Slugify $slugify)
 }
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             $category = new Category();
             $category->setName("category " . $i);
             $manager->persist($category);

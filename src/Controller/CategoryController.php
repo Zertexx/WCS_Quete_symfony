@@ -37,7 +37,7 @@ class CategoryController extends AbstractController
         $categories = $this->getDoctrine()
             ->getRepository(Category::class)
             ->findAll();
-        return $this->render('Blog/list.html.twig', [
+        return $this->render('category/list.html.twig', [
             'categories' => $categories
         ]);
     }
@@ -66,7 +66,7 @@ class CategoryController extends AbstractController
 
             return $this->redirectToRoute('category_index');
         }
-        return $this->render('Blog/form.html.twig', ['form' => $form->createView()]);
+        return $this->render('category/form.html.twig', ['form' => $form->createView()]);
 
     }
 
@@ -81,7 +81,7 @@ class CategoryController extends AbstractController
         $articles = $category->getArticles();
 
         return $this->render(
-            'blog/category.html.twig',
+            'category/category.html.twig',
             [
                 'category' => $category,
                 'articles' => $articles,

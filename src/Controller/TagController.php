@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,4 +42,10 @@ Class TagController extends AbstractController
             'tags' => $tag
         ]);
     }
+    /**
+     * Show all row from article's entity
+     * @param $request Request
+     * @Route("/add", name="tag_add")
+     * @return Response A response instance
+     */
 }

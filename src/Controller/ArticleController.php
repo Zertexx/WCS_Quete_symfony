@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Service\Slugify;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,14 +77,12 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/{id}", name="article_show", methods={"GET"})
-     * @param Article $article
-     * @return Response
      */
-
     public function show(Article $article): Response
     {
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'isFavorite' => $this->getUser()->isFavorite($article)
         ]);
     }
 
@@ -117,7 +116,6 @@ class ArticleController extends AbstractController
 
         }
 
-
         return $this->render('article/edit.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
@@ -143,4 +141,28 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute('article_index');
     }
+
+    /**
+     * @Route("/{id}/favorite", name="article_favorite", methods={"GET","POST"})
+     * @param Request $request
+     * @param Article $article
+     * @param ObjectManager $manager
+     * @return Response
+     */
+    public function favorite(Request $request, Article $article, ObjectManager $manager): Response
+    {
+        if ($this->getUser()->getFavory()->contains($article)) {
+            $this->getUser()->removeFavory($article);
+        }
+        else {
+            $this->getUser()->addFavory($article);
+        }
+
+        $manager->flush();
+
+        return $this->json([
+            'isFavorite' => $this->getUser()->isFavorite($article)
+        ]);
+    }
+
 }

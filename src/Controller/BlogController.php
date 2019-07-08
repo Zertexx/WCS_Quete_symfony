@@ -21,29 +21,6 @@ class BlogController extends AbstractController
 {
 
     /**
-     * Show all row from article's entity
-     *
-     * @Route("/", name="index")
-     * @param SessionInterface $session
-     * @return Response A response instance
-     */
-
-    public function index(SessionInterface $session): Response
-    {
-
-        if (!$session->has('total')) {
-            $session->set('total', 120); // if total doesn’t exist in session, it is initialized.
-        }
-
-        $total = $session->get('total'); // get actual value in session with ‘total' key.
-  // ...
-
-        return $this->render(
-            'Blog/index.html.twig'
-            );
-    }
-
-    /**
      * Getting a article with a formatted slug for title
      *
      * @param string $slug The slugger
@@ -74,7 +51,5 @@ class BlogController extends AbstractController
                 'slug' => $slug,
             ]
         );
-
-
     }
 }

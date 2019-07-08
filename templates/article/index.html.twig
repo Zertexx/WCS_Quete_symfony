@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
+    <h1>Liste des articles</h1>
+
+    {% for favories in app.user.favory %}
+    {% endfor %}
     <button class="btn btn-secondary"><a href="{{ path('article_new') }}">Ajouter</a></button>
 
 
@@ -35,8 +38,10 @@
                     {% if tag is empty%}
                         <td>Aucun tag associé</td>
                     {% else %}
-                    <a class="dropdown-item" href="#">{{ tag.name }}</a>
+                    <a class="dropdown-item" href="{{ path('tag_article', { 'name': tag.name} ) }}">{{ tag.name }}</a>
             {% endif %}
+
+
         {% endfor %}
 
                 <td>
@@ -44,7 +49,8 @@
 
                     {% if is_granted('ROLE_AUTHOR') %}
                         <a href="{{ path('article_edit', { 'id': article.id} ) }}">Éditer</a>
-                </td>
+                        {{ include('article/_delete_form.html.twig') }}
+                        </td>
             </tr>
         {% else %}
             <tr>

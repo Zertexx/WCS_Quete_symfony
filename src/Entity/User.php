@@ -40,9 +40,15 @@ class User implements UserInterface
      */
     private $articles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Article")
+     */
+    private $favory;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->favory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,4 +159,41 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getFavory(): Collection
+    {
+        return $this->favory;
+    }
+
+    public function addFavory(Article $favory): self
+    {
+        if (!$this->favory->contains($favory)) {
+            $this->favory[] = $favory;
+        }
+
+        return $this;
+    }
+
+    public function removeFavory(Article $favory): self
+    {
+        if ($this->favory->contains($favory)) {
+            $this->favory->removeElement($favory);
+        }
+
+        return $this;
+    }
+
+    public function isFavorite(Article $article){
+
+        if ($this->favory->contains($article)) {
+            $isFavorite = true;
+        } else {
+            $isFavorite = false;
+        }
+        return $isFavorite;
+    }
 }
+
