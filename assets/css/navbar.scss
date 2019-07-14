@@ -1,3 +1,16 @@
-.nav{
-  background: #281a67;
+.navbar{
+  a{
+    color: #282138;
+  }
+}
+
+.nav-link:hover{
+  background: #79c0ff;
+  color:blue;
+}
+
+ul{
+  .dropdown{
+    left: 36rem;
+  }
 }

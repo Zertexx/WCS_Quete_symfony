@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h2>Ajouter une catégorie</h2>
+    <h2>{{ 'category.add'|trans }}</h2>
     {{ form_start(form) }}
     {{ form_row(form.name) }}
     <button class="btn btn-secondary">{{ button_label|default('Enregistrer') }}</button>

@@ -14,18 +14,18 @@
             <td>{{ article.id }}</td>
         </tr>
         <tr>
-            <th>Title</th>
+            <th>{{ 'title'|trans }}</th>
             <td>{{ article.title }}</td>
         </tr>
         <tr>
-            <th>Content</th>
+            <th>{{ 'content'|trans }}</th>
             <td>{{ article.content }}</td>
         </tr>
 
         </tbody>
     </table>
 
-    <a href="{{ path('article_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    <a href="{{ path('article_index') }}" class="btn btn-secondary">{{ 'retour.list'|trans }}</a>
 
 
     {{ include('article/_delete_form.html.twig') }}

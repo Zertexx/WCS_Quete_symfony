@@ -4,12 +4,12 @@
     {{ encore_entry_link_tags('app') }}
 {% endblock %}
 {% block body %}
-    <h1>Editer l'Article</h1>
+    <h1>{{ 'article.edit'|trans }}</h1>
 
     {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
 
 
 
-    <a href="{{ path('article_index') }}" class= "btn btn-secondary">Retour à la liste</a>
+    <a href="{{ path('article_index') }}" class= "btn btn-secondary">{{ 'retour.list'|trans }}</a>
 
 {% endblock %}

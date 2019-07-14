@@ -19,7 +19,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/category")
+ * @Route({
+ *     "fr": "categorie",
+ *     "en": "category",
+ *     "es": "categoria",})
  * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_AUTHOR')")
  */
 
@@ -28,7 +31,11 @@ class CategoryController extends AbstractController
 
     /**
      * Show all row from article's entity
-     * @Route("/list", name="category_index")
+     * @Route({
+     *     "fr": "/liste",
+     *     "en": "/list",
+     *     "es": "/lista",
+     * }, name="category_index")
      * @return Response A response instance
      */
 
@@ -46,7 +53,11 @@ class CategoryController extends AbstractController
      * Show all row from article's entity
      * @param $request Request
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/add", name="category_add")
+     * @Route({
+     *     "fr": "/ajout",
+     *     "en": "/new",
+     *     "es": "/crear",
+     * }, name="category_add")
      * @return Response A response instance
      */
 

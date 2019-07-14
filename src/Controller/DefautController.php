@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: zerto
- * Date: 11/05/2019
- * Time: 11:49
+ * Date: 14/07/2019
+ * Time: 18:29
  */
 
 namespace App\Controller;
@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class DefaultController extends AbstractController
+class DefautController extends AbstractController
 {
     /**
      * @Route("/", name="index")
@@ -25,4 +25,3 @@ class DefaultController extends AbstractController
 
 
 }
-
